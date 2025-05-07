@@ -7,3 +7,7 @@ export function signupApi(data) {
 export function loginApi(data) {
     return http.post('/auth/login', data).then(({ data }) => data);
 }
+
+export function logoutApi(data) {
+    return http.post('/auth/logout', data).then(({ data }) => data);
+}

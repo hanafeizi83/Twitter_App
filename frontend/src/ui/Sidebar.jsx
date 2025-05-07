@@ -6,8 +6,10 @@ import { IoNotificationsSharp } from "react-icons/io5";
 import { FaUser } from "react-icons/fa";
 import { TbLogout2 } from "react-icons/tb";
 import { USERS_FOR_RIGHT_PANEL } from './../utils/db/dummy'
+import useLogout from '../hook/useLogout';
 
 function Sidebar() {
+    const { logout } = useLogout();
     const user = USERS_FOR_RIGHT_PANEL[0];
     return (
         <div className='sticky top-0 md:w-[25%] lg:w-[20%] sm:w-[10%] flex flex-col h-[90vh] justify-between sm:items-center md:items-start '>
@@ -45,7 +47,7 @@ function Sidebar() {
                 </Link>
                 <TbLogout2
                     className='text-secondary-800 w-7 h-7 md:w-5 md:h-5 cursor-pointer'
-                    // onClick={() => logout()}
+                    onClick={() => logout()}
                 />
             </div>
         </div>
