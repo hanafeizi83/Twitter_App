@@ -1,11 +1,10 @@
 import './App.css'
+import SignupPage from './feature/auth/signup/SignupPage'
 
 function App() {
   return (
     <>
-      <h1 className="text-3xl font-bold underline">
-        Hello world!
-      </h1>
+    <SignupPage />
     </>
   )
 }

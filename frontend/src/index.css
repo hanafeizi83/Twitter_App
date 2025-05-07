@@ -1,3 +1,86 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    background-color: rgb(var(--color-secondary-100));
+}
+
+@layer base {
+    :root {
+
+        &,
+        &.light-mode {
+            --background-app-rgb: 255, 255, 255;
+            --color-primary-900: 74, 109, 255;
+            --color-primary-800: 92, 124, 255;
+            --color-primary-700: 110, 138, 255;
+            --color-primary-600: 128, 153, 255;
+            --color-primary-500: 146, 167, 255;
+            --color-primary-400: 164, 182, 255;
+            --color-primary-300: 183, 197, 255;
+            --color-primary-200: 201, 211, 255;
+            --color-primary-100: 219, 226, 255;
+            --color-primary-50: 228, 233, 255;
+            --color-secondary-900: 17, 24, 39;
+            --color-secondary-800: 31, 41, 55;
+            --color-secondary-700: 55, 65, 81;
+            --color-secondary-600: 75, 85, 99;
+            --color-secondary-500: 107, 114, 128;
+            --color-secondary-400: 156, 163, 175;
+            --color-secondary-300: 209, 213, 219;
+            --color-secondary-200: 229, 231, 235;
+            --color-secondary-100: 243, 244, 246;
+            --color-secondary-50: 249, 250, 251;
+            --color-secondary-0: 255, 255, 255;
+            --color-success: 0, 192, 115;
+            --color-warning: 255, 153, 0;
+            --color-error: 255, 71, 87;
+            --color-red-500: 239, 68, 68;
+            --color-red-300: 252, 165, 165;
+            --color-purple: 123, 107, 212;
+            --color-pink: 253, 73, 107;
+            --color-green: 4, 172, 65;
+        }
+
+        &.dark-mode {
+            --color-secondary-900: 249, 250, 251;
+            --color-secondary-800: 243, 244, 246;
+            --color-secondary-700: 229, 231, 235;
+            --color-secondary-600: 209, 213, 219;
+            --color-secondary-500: 156, 163, 175;
+            --color-secondary-400: 107, 114, 128;
+            --color-secondary-300: 75, 85, 99;
+            --color-secondary-200: 55, 65, 81;
+            --color-secondary-100: 29, 35, 42;
+            --color-secondary-50: 17, 24, 39;
+            --color-secondary-0: 24, 33, 47;
+            --backdrop-color: 0, 0, 0;
+        }
+    }
+}
+
+@layer components {
+    .formInput {
+        @apply bg-transparent w-full h-8 placeholder:text-secondary-400 pl-7 p-5 text-secondary-800
+    }
+
+    .formLabel {
+        @apply flex w-full text-center items-center relative border border-secondary-300 rounded
+    }
+
+    .btn-primary {
+        @apply bg-primary-800 transition-all duration-300 text-secondary-900 rounded-full hover:bg-primary-900 p-2
+    }
+
+    .icon-sideBar {
+        @apply md:w-8 md:h-8 w-10 h-10 text-secondary-900
+    }
+    .inputModal{
+        @apply bg-transparent w-full h-[2.6rem] placeholder:text-secondary-500 text-secondary-800 p-1 border border-secondary-400 rounded
+    }
+}
+
+.scrollBar::-webkit-scrollbar {
+    display: none;
+}
