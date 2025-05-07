@@ -7,10 +7,12 @@ import { FaUser } from "react-icons/fa";
 import { TbLogout2 } from "react-icons/tb";
 import { USERS_FOR_RIGHT_PANEL } from './../utils/db/dummy'
 import useLogout from '../hook/useLogout';
+import useUser from './../hook/useUser'
 
 function Sidebar() {
     const { logout } = useLogout();
-    const user = USERS_FOR_RIGHT_PANEL[0];
+    const { authUser: user } = useUser()
+    // const user = USERS_FOR_RIGHT_PANEL[0];
     return (
         <div className='sticky top-0 md:w-[25%] lg:w-[20%] sm:w-[10%] flex flex-col h-[90vh] justify-between sm:items-center md:items-start '>
             <ul className='flex flex-col gap-5'>
