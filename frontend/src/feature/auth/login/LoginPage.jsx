@@ -64,7 +64,7 @@ function LoginPage() {
         </form>
         <div className='flex flex-col gap-2 mt-4 '>
           <p className='text-white text-lg'>{"Don't"} have an account?</p>
-          <Link to='/signup'>
+          <Link to='/singup'>
             <button className='btn-primary  bg-transparent border border-primary-800 text-white w-full'>Sign up</button>
           </Link>
         </div>

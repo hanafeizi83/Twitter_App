@@ -22,7 +22,7 @@ function Home() {
                 </div>
             </div>
             <CreatePost />
-            <Posts />
+            <Posts feedType={feedType} />
         </div>
     )
 }
