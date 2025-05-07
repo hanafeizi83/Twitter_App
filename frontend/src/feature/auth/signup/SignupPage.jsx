@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import Loading from '../../../ui/Loading'
+import useSignUp from './useSignUp'
 
 const initialValues = {
     email: '',
@@ -22,8 +23,13 @@ const validationSchema = Yup.object({
     password: Yup.string().required('password is required').matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/, { message: "Please create a stronger password" })
 })
 function SignupPage() {
+    const { signUp, isLoading } = useSignUp();
     const onSubmit = (values) => {
-        console.log(values);
+        signUp(values, {
+            onSuccess: () => {
+                formik.resetForm();
+            }
+        })
     }
     const formik = useFormik({
         initialValues,
@@ -31,7 +37,6 @@ function SignupPage() {
         validationSchema
     })
 
-    const isLoading = false;
     return (
         <div className='container max-w-screen-lg max-lg flex h-screen'>
             <div className='flex-1 hidden lg:flex items-center  justify-center'>
