@@ -11,3 +11,7 @@ export function loginApi(data) {
 export function logoutApi(data) {
     return http.post('/auth/logout', data).then(({ data }) => data);
 }
+
+export function UserApi() {
+    return http.get('/auth/me').then(({ data }) => data);
+}
