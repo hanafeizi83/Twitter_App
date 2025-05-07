@@ -1,0 +1,138 @@
+import React, { useRef, useState } from 'react'
+import { FaArrowLeft, FaLink } from "react-icons/fa";
+import { Link } from 'react-router-dom'
+import { MdEdit } from "react-icons/md";
+import { IoCalendarOutline } from "react-icons/io5";
+import Posts from './../feature/post/Posts'
+import Modal from '../ui/Modal';
+import ProfileUpdateForm from '../feature/profile/ProfileUpdateForm';
+function Profile() {
+    const coverImgRef = useRef();
+    const userImgRef = useRef();
+    const [open, setOpen] = useState(false)
+    const [coverImg, setCoverImg] = useState();
+    const [userImg, setUserImg] = useState();
+    const [feedType, setFeedType] = useState('posts');
+    const isMyProfile = true;
+    const handelChange = (e, state) => {
+        if (e.target.files) {
+            if (state === 'coverImg') setCoverImg(URL.createObjectURL(e.target.files[0]))
+            if (state === 'userImg') setUserImg(URL.createObjectURL(e.target.files[0]))
+        }
+    }
+
+    console.log(feedType);
+
+
+    return (
+        <>
+            <div className='lg:w-[56%] w-full border-x border-secondary-300'>
+                {/* Profile Header */}
+                <div className='flex items-center text-secondary-800 p-4 gap-8'>
+                    <Link to={'/'}>
+                        <FaArrowLeft className='w-5 h-5' />
+                    </Link>
+                    <div className='flex flex-col items-center'>
+                        <h3 className='font-bold '>Hana Feizi</h3>
+                        <p className='text-sm text-secondary-400'>4 posts</p>
+                    </div>
+                </div>
+                {/* Prfile Images */}
+                <div className='relative'>
+                    <div className='relative h-48 w-full group'>
+                        <img src={coverImg || '/cover.png'} alt="" className='h-full w-full' />
+                        {
+                            isMyProfile && <div
+                                className='bg-secondary-300 text-secondary-900 rounded-full p-1 w-6 h-6 cursor-pointer absolute top-2 right-2 hidden group-hover:block'
+                                onClick={() => coverImgRef.current.click()}
+                            >
+
+                                <MdEdit className='w-full h-full' />
+                            </div>
+                        }
+
+                    </div>
+                    <div className='absolute top-24 flex items-center justify-between p-4 w-full'>
+                        <div className='relative group'>
+                            <img src={userImg || '/avatar-placeholder.png'} alt="" className='w-36 h-36 rounded-full' />
+                            {
+                                isMyProfile && <div
+                                    className='bg-primary-900 text-secondary-900 rounded-full p-1 w-6 h-6 cursor-pointer absolute top-4 right-6 hidden group-hover:block'
+                                    onClick={() => userImgRef.current.click()}
+                                >
+                                    <MdEdit className='w-full h-full' />
+                                </div>
+                            }
+
+                        </div>
+                        <input type="file" hidden name='coverImg' ref={coverImgRef} onChange={(e) => handelChange(e, 'coverImg')} />
+                        <input type="file" hidden name='userImg' ref={userImgRef} onChange={(e) => handelChange(e, 'userImg')} />
+                        {
+                            isMyProfile ?
+                                <>
+                                    <div className='absolute right-2 top-28 space-x-2'>
+                                        <button
+                                            onClick={() => setOpen(true)}
+                                            className='text-secondary-800 border border-secondary-700 px-3 py-1 rounded-full '>Edit Profile</button>
+                                        {(userImg || coverImg) && <button className='bg-primary-900 text-secondary-800 px-3 py-1 rounded-full'>Update</button>}
+                                    </div>
+                                </>
+                                :
+                                <button className='text-secondary-800 absolute right-4 top-28'>Follow</button>
+                        }
+                    </div>
+
+                </div>
+                {/* Profile Cotext */}
+                <div className='mt-24 text-secondary-800 text-center p-4'>
+                    <h2 className='font-bold '>Hana Feizi</h2>
+                    <p className='text-secondary-400'>@hana</p>
+                    <p>hi everyone I'm hana</p>
+                    <div className='flex items-center gap-2 mt-4'>
+                        <FaLink className='w-3 h-3 text-secondary-400' />
+                        <a
+                            className='text-primary-800 '
+                            href="https://github.com/hanafeizi83">
+                            https://github.com/hanafeizi83
+                        </a>
+                        <IoCalendarOutline className='w-4 h-4 text-secondary-400' />
+                        <span className='text-secondary-400 text-sm'>Joined April 2025</span>
+                    </div>
+                    <div className='flex items-center gap-2 mt-4'>
+                        <div className='flex items-center gap-1'>
+                            <h2 className='font-sm font-bold text-secondary-800'>2</h2>
+                            <span className='text-secondary-400'>Following</span>
+                        </div>
+                        <div className='flex items-center gap-1'>
+                            <h2 className='font-sm font-bold text-secondary-800'>1</h2>
+                            <span className='text-secondary-400'>Followers</span>
+                        </div>
+
+                    </div>
+                </div>
+                <div className='w-full border-x flex items-center justify-between border-b border-secondary-300'>
+                    <div
+                        onClick={() => setFeedType('posts')}
+                        className='flex-1 flex  justify-center relative text-center text-secondary-700 cursor-pointer p-2 hover:bg-secondary-200 transition-all duration-300'>
+                        Posts
+                        {feedType === 'posts' && <div className='absolute bottom-0 w-10  h-1 rounded-full bg-primary-800'></div>}
+                    </div>
+                    <div
+                        onClick={() => setFeedType('likes')}
+                        className='flex-1 relative flex  justify-center text-center text-secondary-700 cursor-pointer p-2 hover:bg-secondary-200 transition-all duration-300'>
+                        Likes
+                        {feedType === 'likes' && <div className='absolute bottom-0 w-10  h-1 rounded-full bg-primary-800'></div>}
+                    </div>
+                </div>
+
+                <Posts />
+            </div>
+            <Modal open={open} onClose={() => setOpen(false)} title='Update Profile'>
+                <ProfileUpdateForm />
+            </Modal>
+
+        </>
+    )
+}
+
+export default Profile
