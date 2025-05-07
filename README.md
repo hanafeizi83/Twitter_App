@@ -1,12 +1,47 @@
-# React + Vite
+# MERN Stack Project: Build and Deploy a Twitter Clone From Scratch | JWT, Socket.io
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Demo App](https://i.ibb.co/f8y9vGS/Group-82.png)
 
-Currently, two official plugins are available:
+[Video Tutorial on Youtube](https://youtu.be/4GUVz2psWUg)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Some Features:
 
-## Expanding the ESLint configuration
+-   ⚛️ Tech Stack: React.js, MongoDB, Node.js, Express, Tailwind
+-   🔐 Authentication with JSONWEBTOKENS (JWT)
+-   🔥 React Query for Data Fetching, Caching etc.
+-   👥 Suggested Users to Follow
+-   ✍️ Creating Posts
+-   🗑️ Deleting Posts
+-   💬 Commenting on Posts
+-   ❤️ Liking Posts
+-   🔒 Delete Posts (if you are the owner)
+-   📝 Edit Profile Info
+-   🖼️ Edit Cover Image and Profile Image
+-   📷 Image Uploads using Cloudinary
+-   🔔 Send Notifications
+-   🌐 Deployment
+-   ⏳ And much more!
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Setup .env file
+
+```js
+MONGO_URI=...
+PORT=...
+JWT_SECRET=...
+NODE_ENV=...
+CLOUDINARY_CLOUD_NAME=...
+CLOUDINARY_API_KEY=...
+CLOUDINARY_API_SECRET=...
+```
+
+### Build the app
+
+```shell
+npm run build
+```
+
+### Start the app
+
+```shell
+npm start
+```
