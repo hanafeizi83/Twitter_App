@@ -6,9 +6,11 @@ import Home from './pages/Home'
 import AppLayout from './ui/AppLayout'
 import Notification from './pages/Notification'
 import Profile from './pages/Profile'
+import { Toaster } from 'react-hot-toast'
 function App() {
   return (
     <>
+      <Toaster />
       <Routes>
         <Route path='/' element={<AppLayout />}>
           <Route path='/' element={<Home />} />
@@ -16,7 +18,7 @@ function App() {
           <Route path='/profile/:username' element={<Profile />} />
         </Route>
         <Route path='/login' element={<LoginPage />} />
-        <Route path='/signup' element={<SignupPage />} />
+        <Route path='/singup' element={<SignupPage />} />
       </Routes>
     </>
   )

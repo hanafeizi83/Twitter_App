@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import * as Yup from 'yup'
 import Loading from '../../../ui/Loading'
 import XSvg from '../../../ui/X'
+import useLogin from './useLogin'
 
 const initialValues = {
   username: '',
@@ -19,10 +20,13 @@ const validationSchema = Yup.object({
 })
 
 function LoginPage() {
-  const isLoading = false;
+  const { isLoading, login } = useLogin();
   const onSubmit = (values) => {
-    console.log(values);
-
+    login(values, {
+      onSuccess: () => {
+        formik.resetForm();
+      }
+    })
   }
 
   const formik = useFormik({
