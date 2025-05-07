@@ -2,10 +2,13 @@ import React from 'react'
 import { FaHeart, FaUser } from 'react-icons/fa';
 import { Link } from 'react-router-dom'
 import NotificationSetting from '../ui/NotificationSetting';
+import useNotification from '../hook/useNotification';
 
 function Notification() {
     const notificationType = 'liked';
-
+    const { notifications } = useNotification();
+    console.log(notifications);
+    
     return (
         <div className='border-x border-secondary-300 lg:w-[56%] h-screen w-full'>
             {/* Notification Header */}
