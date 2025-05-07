@@ -2,7 +2,6 @@ import React from 'react'
 import Post from './Post'
 import { POSTS } from './../../utils/db/dummy'
 function Posts() {
-
   return (
     <div className=''>
       {

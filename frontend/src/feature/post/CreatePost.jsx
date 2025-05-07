@@ -3,7 +3,6 @@ import { CiImageOn } from "react-icons/ci";
 import { BsEmojiSmileFill } from "react-icons/bs";
 import { IoCloseSharp } from 'react-icons/io5';
 
-
 function CreatePost() {
   const imgRef = useRef();
   const [image, setImage] = useState();
