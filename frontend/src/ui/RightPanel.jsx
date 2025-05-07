@@ -1,15 +1,17 @@
 import React from 'react'
 import { USERS_FOR_RIGHT_PANEL } from './../utils/db/dummy'
 import { Link } from 'react-router-dom';
+import useSuggestedUsers from '../hook/useSuggestedUsers';
 function RightPanel() {
+    const { suggestedUsers, isLoading } = useSuggestedUsers();
     return (
         <div className='bg-black w-[22%] rounded-md p-2 top-0 right-0 hidden lg:sticky self-start  lg:flex flex-col'>
             <h1 className='font-extrabold text-secondary-900 text-center mb-2'>Who to follow</h1>
             {
-                USERS_FOR_RIGHT_PANEL.map(user => {
+                suggestedUsers.map(user => {
                     return <div key={user._id} className='grid grid-cols-[40px_1fr_65px] grid-rows-1 items-center mb-4'>
                         <Link to={`profile/${user.username}`}>
-                            <img src={user.profileImg} alt="" className='w-10 h-10' />
+                            <img src={user.profileImg || '/avatar-placeholder.png'} alt="" className='w-10 h-10 rounded-full' />
                         </Link>
 
                         <Link to={`profile/${user.username}`} className='text-center text-secondary-800'>
