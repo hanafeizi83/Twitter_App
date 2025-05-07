@@ -6,9 +6,14 @@ import { FaRegHeart } from "react-icons/fa";
 import { FaRegBookmark } from "react-icons/fa6";
 import Modal from '../../ui/Modal';
 import Comments from './Comments';
+import useUser from '../../hook/useUser';
 
 function Post({ post }) {
-  const isMyPost = true;
+  const { authUser } = useUser();
+  console.log(authUser);
+  console.log(post);
+
+  const isMyPost = authUser?._id === post?.user?._id;
   const isLiked = true;
   const date = '1h';
   const [open, setOpen] = useState(false)

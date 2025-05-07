@@ -2,10 +2,12 @@ import React, { useRef, useState } from 'react'
 import { CiImageOn } from "react-icons/ci";
 import { BsEmojiSmileFill } from "react-icons/bs";
 import { IoCloseSharp } from 'react-icons/io5';
+import useUser from './../../hook/useUser'
 
 function CreatePost() {
   const imgRef = useRef();
   const [image, setImage] = useState();
+  const { isLoading, authUser } = useUser();
 
   const handelChangeImg = (e) => {
     if (e.target.files) {
@@ -15,7 +17,7 @@ function CreatePost() {
 
   return (
     <div className='w-full p-4 flex gap-4 border-x border-secondary-300'>
-      <img src="/avatars/boy2.png" alt="profile" className='w-8 h-8' />
+      <img src={`${authUser.profileImg || '/avatar-placeholder.png'} `} alt="profile" className='w-8 h-8 rounded-full' />
       <div className='w-full space-y-1'>
         <textarea
           name="text"
@@ -32,7 +34,7 @@ function CreatePost() {
 
             }
             className='w-6 h-6 text-secondary-800 cursor-pointer mb-3' />
-          <img src={image} alt="post Image" className='w-full h-72 mb-3 object-contain'  />
+          <img src={image} alt="post Image" className='w-full h-72 mb-3 object-contain' />
         </div>}
         <div className='flex items-center justify-between border-t border-secondary-400 py-2'>
           <div className='flex gap-2'>
