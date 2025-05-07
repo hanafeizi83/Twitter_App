@@ -22,7 +22,7 @@ function Post({ post }) {
       <div className='border border-secondary-300'>
         {/* Post Header */}
         <div className='flex gap-2 px-4 py-2'>
-          <img src={post.user.profileImg} alt="" className='w-8 h-8' />
+          <img src={post.user.profileImg || '/avatar-placeholder.png'} alt="" className='rounded-full w-8 h-8' />
           <div className='w-full '>
             <div className='flex items-center justify-between'>
               <div className='flex items-center gap-2'>

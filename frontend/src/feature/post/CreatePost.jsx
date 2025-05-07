@@ -3,23 +3,38 @@ import { CiImageOn } from "react-icons/ci";
 import { BsEmojiSmileFill } from "react-icons/bs";
 import { IoCloseSharp } from 'react-icons/io5';
 import useUser from './../../hook/useUser'
+import useCreatePost from './useCreatePost';
 
 function CreatePost() {
   const imgRef = useRef();
+  const [text, setText] = useState('');
   const [image, setImage] = useState();
   const { isLoading, authUser } = useUser();
-
+  const { isCreating, createPost } = useCreatePost();
   const handelChangeImg = (e) => {
     if (e.target.files) {
       setImage(URL.createObjectURL(e.target.files[0]))
     }
   }
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('hana');
+    
+    createPost({ text, img: image }, {
+      // onSuccess: () => {
+      //   setImage('');
+      //   setText('');
+      //   imgRef.current.value = null;
+      // }
+    })
+  }
   return (
     <div className='w-full p-4 flex gap-4 border-x border-secondary-300'>
       <img src={`${authUser.profileImg || '/avatar-placeholder.png'} `} alt="profile" className='w-8 h-8 rounded-full' />
-      <div className='w-full space-y-1'>
+      <form className='w-full space-y-1' onSubmit={handleSubmit}>
         <textarea
+          value={text}
+          onChange={(e) => setText(e.target.value)}
           name="text"
           className='bg-transparent outline-none w-full text-secondary-800 placeholder:text-secondary-500 border-b border-secondary-400 h-[4rem] resize-none'
           placeholder='What is happening?!'
@@ -44,7 +59,7 @@ function CreatePost() {
           </div>
           <button className='bg-primary-900 text-secondary-800 rounded-full px-4 py-1'>Post</button>
         </div>
-      </div>
+      </form>
 
     </div>
   )
