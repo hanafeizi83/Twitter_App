@@ -8,19 +8,21 @@ import Modal from '../../ui/Modal';
 import Comments from './Comments';
 import useUser from '../../hook/useUser';
 import useDeletePost from './useDeletePost';
+import useLikePost from './useLikePost';
 
 function Post({ post }) {
+  const [open, setOpen] = useState(false);
+
   const { authUser } = useUser();
   const { isDeleting, deletePost } = useDeletePost();
+  const { isLiking, likePost } = useLikePost();
+
   console.log(authUser);
   console.log(post);
-  const handleDeletePost = () => {
-    deletePost(post?._id)
-  }
+
   const isMyPost = authUser?._id === post?.user?._id;
-  const isLiked = true;
+  const isLiked = post?.likes.includes(authUser._id);
   const date = '1h';
-  const [open, setOpen] = useState(false)
   return (
     <>
       <div className='border border-secondary-300'>
@@ -37,7 +39,7 @@ function Post({ post }) {
                 isMyPost &&
                 <BsFillTrashFill
                   className='text-secondary-800 cursor-pointer transition-all duration-300 hover:text-red-600'
-                  onClick={handleDeletePost}
+                  onClick={() => deletePost(post?._id)}
                 />
               }
             </div>
@@ -61,9 +63,11 @@ function Post({ post }) {
                 <RiShareForward2Fill />
                 <span >{post?.share?.length || 0}</span>
               </div>
-              <div className={`flex items-center hover:text-pink-500 gap-1 transition-all duration-300 cursor-pointer  ${isLiked ? 'text-pink-500' : 'text-secondary-400'}`}>
+              <div
+                onClick={() => likePost(post?._id)}
+                className={`group flex items-center hover:text-pink-500 gap-1 transition-all duration-300 cursor-pointer  ${isLiked ? 'text-pink-500' : 'text-secondary-400'}`}>
                 <FaRegHeart />
-                <span className={`${isLiked ? 'text-pink-500' : 'text-secondary-400'} `}>{post?.likes?.length}</span>
+                <span className={`group-hover:text-pink-500 ${isLiked ? 'text-pink-500' : 'text-secondary-400'} `}>{post?.likes?.length}</span>
               </div>
               <div className='flex items-center text-secondary-400 gap-1 transition-all duration-300 cursor-pointer'>
                 <FaRegBookmark />

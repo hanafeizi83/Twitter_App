@@ -11,7 +11,7 @@ export default function useCreatePost() {
             queryClient.invalidateQueries({ queryKey: ['posts'] })
         },
         onError: (err) => {
-            toast.error(err?.response?.data?.error)
+            toast.error(err?.message)
         }
     })
     return { isCreating, createPost }

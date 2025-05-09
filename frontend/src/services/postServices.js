@@ -11,3 +11,7 @@ export function createPostApi(data) {
 export function deletePostApi(id) {
     return http.delete(`/posts/${id}`).then(({ data }) => data);
 }
+
+export function likePostApi(id) {
+    return http.post(`/posts/like/${id}`).then(({ data }) => data);
+}
