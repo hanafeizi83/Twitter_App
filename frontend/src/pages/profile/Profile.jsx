@@ -8,6 +8,8 @@ import Modal from '../../ui/Modal';
 import ProfileUpdateForm from './ProfileUpdateForm';
 import useUser from '../../hook/useUser';
 import useUserProfile from './useUserProfile';
+import { formatMemberSinceDate } from './../../utils/date/index'
+import usePosts from '../../feature/post/usePosts';
 
 function Profile() {
     const coverImgRef = useRef();
@@ -26,6 +28,7 @@ function Profile() {
     const { username } = useParams();
     const { authUser } = useUser();
     const { user, isLoading } = useUserProfile(username);
+    const { posts } = usePosts(feedType, username);
     const isMyProfile = authUser?._id === user?._id;
     console.log(feedType);
 
@@ -41,7 +44,7 @@ function Profile() {
                     </Link>
                     <div className='flex flex-col items-center'>
                         <h3 className='font-bold '>{user?.fullName}</h3>
-                        <p className='text-sm text-secondary-400'>4 posts</p>
+                        <p className='text-sm text-secondary-400'>{posts && posts.length} posts</p>
                     </div>
                 </div>
                 {/* Prfile Images */}
@@ -106,7 +109,7 @@ function Profile() {
                             {user?.link}
                         </a>
                         <IoCalendarOutline className='w-4 h-4 text-secondary-400' />
-                        <span className='text-secondary-400 text-sm'>Joined April 2025</span>
+                        <span className='text-secondary-400 text-sm'>{formatMemberSinceDate(user?.createdAt)}</span>
                     </div>
                     <div className='flex items-center gap-2 mt-4'>
                         <div className='flex items-center gap-1'>

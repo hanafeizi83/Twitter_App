@@ -9,6 +9,7 @@ import Comments from './Comments';
 import useUser from '../../hook/useUser';
 import useDeletePost from './useDeletePost';
 import useLikePost from './useLikePost';
+import { formatPostDate } from './../../utils/date/index';
 
 function Post({ post }) {
   const [open, setOpen] = useState(false);
@@ -18,11 +19,11 @@ function Post({ post }) {
   const { isLiking, likePost } = useLikePost();
 
   // console.log(authUser);
-  // console.log(post);
+  console.log(post);
 
   const isMyPost = authUser?._id === post?.user?._id;
   const isLiked = post?.likes.includes(authUser._id);
-  const date = '1h';
+  const date = formatPostDate(post?.createdAt);
   return (
     <>
       <div className='border border-secondary-300'>
