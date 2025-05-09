@@ -17,8 +17,8 @@ function Post({ post }) {
   const { isDeleting, deletePost } = useDeletePost();
   const { isLiking, likePost } = useLikePost();
 
-  console.log(authUser);
-  console.log(post);
+  // console.log(authUser);
+  // console.log(post);
 
   const isMyPost = authUser?._id === post?.user?._id;
   const isLiked = post?.likes.includes(authUser._id);

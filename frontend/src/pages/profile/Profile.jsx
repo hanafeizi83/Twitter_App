@@ -5,8 +5,9 @@ import { MdEdit } from "react-icons/md";
 import { IoCalendarOutline } from "react-icons/io5";
 import Posts from '../../feature/post/Posts'
 import Modal from '../../ui/Modal';
-import ProfileUpdateForm from '../../feature/profile/ProfileUpdateForm';
+import ProfileUpdateForm from './ProfileUpdateForm';
 import useUser from '../../hook/useUser';
+import useUserProfile from './useUserProfile';
 
 function Profile() {
     const coverImgRef = useRef();
@@ -15,7 +16,7 @@ function Profile() {
     const [coverImg, setCoverImg] = useState();
     const [userImg, setUserImg] = useState();
     const [feedType, setFeedType] = useState('posts');
-    const isMyProfile = true;
+
     const handelChange = (e, state) => {
         if (e.target.files) {
             if (state === 'coverImg') setCoverImg(URL.createObjectURL(e.target.files[0]))
@@ -24,8 +25,11 @@ function Profile() {
     }
     const { username } = useParams();
     const { authUser } = useUser();
+    const { user, isLoading } = useUserProfile(username);
+    const isMyProfile = authUser?._id === user?._id;
     console.log(feedType);
 
+    console.log(user, authUser);
 
     return (
         <>
@@ -36,14 +40,14 @@ function Profile() {
                         <FaArrowLeft className='w-5 h-5' />
                     </Link>
                     <div className='flex flex-col items-center'>
-                        <h3 className='font-bold '>Hana Feizi</h3>
+                        <h3 className='font-bold '>{user?.fullName}</h3>
                         <p className='text-sm text-secondary-400'>4 posts</p>
                     </div>
                 </div>
                 {/* Prfile Images */}
                 <div className='relative'>
                     <div className='relative h-48 w-full group'>
-                        <img src={coverImg || '/cover.png'} alt="" className='h-full w-full' />
+                        <img src={coverImg || user?.coverImg || '/cover.png'} alt="" className='h-full w-full' />
                         {
                             isMyProfile && <div
                                 className='bg-secondary-300 text-secondary-900 rounded-full p-1 w-6 h-6 cursor-pointer absolute top-2 right-2 hidden group-hover:block'
@@ -57,7 +61,7 @@ function Profile() {
                     </div>
                     <div className='absolute top-24 flex items-center justify-between p-4 w-full'>
                         <div className='relative group'>
-                            <img src={userImg || '/avatar-placeholder.png'} alt="" className='w-36 h-36 rounded-full' />
+                            <img src={userImg || user?.profileImg || '/avatar-placeholder.png'} alt="" className='w-36 h-36 rounded-full' />
                             {
                                 isMyProfile && <div
                                     className='bg-primary-900 text-secondary-900 rounded-full p-1 w-6 h-6 cursor-pointer absolute top-4 right-6 hidden group-hover:block'
@@ -81,33 +85,36 @@ function Profile() {
                                     </div>
                                 </>
                                 :
-                                <button className='text-secondary-800 absolute right-4 top-28'>Follow</button>
+                                <button className='absolute right-4 top-28 bg-secondary-900 rounded-full text-secondary-0 font-bold px-4 py-1'>
+                                    {authUser?.following.includes(user?._id) ? 'Unfollow' : 'Follow'}
+
+                                </button>
                         }
                     </div>
 
                 </div>
                 {/* Profile Cotext */}
                 <div className='mt-24 text-secondary-800 text-center p-4'>
-                    <h2 className='font-bold '>Hana Feizi</h2>
-                    <p className='text-secondary-400'>@hana</p>
-                    <p>hi everyone I'm hana</p>
+                    <h2 className='font-bold '>{user?.fullName}</h2>
+                    <p className='text-secondary-400'>@{user?.username}</p>
+                    <p>{user?.bio}</p>
                     <div className='flex items-center gap-2 mt-4'>
-                        <FaLink className='w-3 h-3 text-secondary-400' />
                         <a
-                            className='text-primary-800 '
+                            className='text-primary-800 flex items-center gap-1'
                             href="https://github.com/hanafeizi83">
-                            https://github.com/hanafeizi83
+                            {user?.link && <FaLink className='w-3 h-3 text-secondary-400' />}
+                            {user?.link}
                         </a>
                         <IoCalendarOutline className='w-4 h-4 text-secondary-400' />
                         <span className='text-secondary-400 text-sm'>Joined April 2025</span>
                     </div>
                     <div className='flex items-center gap-2 mt-4'>
                         <div className='flex items-center gap-1'>
-                            <h2 className='font-sm font-bold text-secondary-800'>2</h2>
+                            <h2 className='font-sm font-bold text-secondary-800'>{user?.following.length}</h2>
                             <span className='text-secondary-400'>Following</span>
                         </div>
                         <div className='flex items-center gap-1'>
-                            <h2 className='font-sm font-bold text-secondary-800'>1</h2>
+                            <h2 className='font-sm font-bold text-secondary-800'>{user?.followers.length}</h2>
                             <span className='text-secondary-400'>Followers</span>
                         </div>
 
@@ -128,7 +135,7 @@ function Profile() {
                     </div>
                 </div>
 
-                <Posts feedType={feedType} username={username} />
+                <Posts feedType={feedType} username={username} userId={user?._id} />
             </div>
             <Modal open={open} onClose={() => setOpen(false)} title='Update Profile'>
                 <ProfileUpdateForm />
