@@ -2,10 +2,10 @@ import React from 'react'
 import { FaHeart, FaUser } from 'react-icons/fa';
 import { Link } from 'react-router-dom'
 import NotificationSetting from '../ui/NotificationSetting';
-import useNotification from '../hook/useNotification';
+import useNotification from '../hook/notification/useNotification';
+import useDeleteNotifications from '../hook/notification/useDeleteNotifications';
 
 function Notification() {
-    const notificationType = 'liked';
     const { notifications } = useNotification();
     console.log(notifications);
 
@@ -20,9 +20,10 @@ function Notification() {
 
             <div>
                 {
+                    notifications && !notifications.length && <h2 className='font-bold text-secondary-800 text-center py-4'>No Notification 🤔</h2>
+                }
+                {
                     notifications && notifications.map((item) => {
-                        console.log(item);
-                        
                         return <div className='flex p-4 gap-2 border-y border-y-secondary-300'>
                             {item.type == 'follow' && <FaUser className='w-7 h-7 text-primary-800' />}
                             {item.type == 'like' && <FaHeart className='w-7 h-7 text-red-500' />}

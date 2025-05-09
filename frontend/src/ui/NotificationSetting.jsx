@@ -1,11 +1,13 @@
 import { Menu, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 import { IoSettingsOutline } from "react-icons/io5";
+import useDeleteNotifications from '../hook/notification/useDeleteNotifications';
 
 export default function Example() {
+    const { deleteNotification } = useDeleteNotifications();
     const handelClick = (e) => {
         e.stopPropagation();
-        console.log('hanii');
+        deleteNotification()
     }
     return (
         <Menu as="div" className="relative inline-block text-left">

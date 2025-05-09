@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { notificationApi } from "../services/notificationServices";
+import { notificationApi } from "../../services/notificationServices";
 
 export default function useNotification() {
     const { data: notifications, isLoading } = useQuery({
