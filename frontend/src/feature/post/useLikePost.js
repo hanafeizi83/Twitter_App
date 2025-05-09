@@ -8,6 +8,7 @@ export default function useLikePost() {
         mutationFn: likePostApi,
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['posts'] })
+            queryClient.invalidateQueries({ queryKey: ['notifications'] })
         },
         onError: (err) => {
             toast.error(err?.message)

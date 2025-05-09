@@ -1,7 +1,7 @@
 import { Menu, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 import { IoSettingsOutline } from "react-icons/io5";
-import useDeleteNotifications from '../hook/notification/useDeleteNotifications';
+import useDeleteNotifications from '../pages/notification/useDeleteNotifications';
 
 export default function Example() {
     const { deleteNotification } = useDeleteNotifications();

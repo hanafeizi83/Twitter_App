@@ -3,10 +3,11 @@ import { FaArrowLeft, FaLink } from "react-icons/fa";
 import { Link, useParams } from 'react-router-dom'
 import { MdEdit } from "react-icons/md";
 import { IoCalendarOutline } from "react-icons/io5";
-import Posts from './../feature/post/Posts'
-import Modal from '../ui/Modal';
-import ProfileUpdateForm from '../feature/profile/ProfileUpdateForm';
-import useUser from '../hook/useUser';
+import Posts from '../../feature/post/Posts'
+import Modal from '../../ui/Modal';
+import ProfileUpdateForm from '../../feature/profile/ProfileUpdateForm';
+import useUser from '../../hook/useUser';
+
 function Profile() {
     const coverImgRef = useRef();
     const userImgRef = useRef();

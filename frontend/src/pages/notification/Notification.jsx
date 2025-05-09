@@ -1,13 +1,11 @@
 import React from 'react'
 import { FaHeart, FaUser } from 'react-icons/fa';
 import { Link } from 'react-router-dom'
-import NotificationSetting from '../ui/NotificationSetting';
-import useNotification from '../hook/notification/useNotification';
-import useDeleteNotifications from '../hook/notification/useDeleteNotifications';
+import NotificationSetting from '../../ui/NotificationSetting';
+import useNotification from './useNotification';
 
 function Notification() {
-    const { notifications } = useNotification();
-    console.log(notifications);
+    const { notifications, isLoading } = useNotification();
 
     return (
         <div className='border-x border-secondary-300 lg:w-[56%] h-screen w-full'>
