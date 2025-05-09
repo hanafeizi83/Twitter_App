@@ -7,12 +7,16 @@ import { FaRegBookmark } from "react-icons/fa6";
 import Modal from '../../ui/Modal';
 import Comments from './Comments';
 import useUser from '../../hook/useUser';
+import useDeletePost from './useDeletePost';
 
 function Post({ post }) {
   const { authUser } = useUser();
+  const { isDeleting, deletePost } = useDeletePost();
   console.log(authUser);
   console.log(post);
-
+  const handleDeletePost = () => {
+    deletePost(post?._id)
+  }
   const isMyPost = authUser?._id === post?.user?._id;
   const isLiked = true;
   const date = '1h';
@@ -31,7 +35,10 @@ function Post({ post }) {
               </div>
               {
                 isMyPost &&
-                <BsFillTrashFill className='text-secondary-800 cursor-pointer transition-all duration-300 hover:text-red-600' />
+                <BsFillTrashFill
+                  className='text-secondary-800 cursor-pointer transition-all duration-300 hover:text-red-600'
+                  onClick={handleDeletePost}
+                />
               }
             </div>
             {/* Post Cotent */}
