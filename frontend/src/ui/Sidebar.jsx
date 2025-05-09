@@ -31,7 +31,7 @@ function Sidebar() {
                         <span className='hidden md:flex text-secondary-900'>Notification</span>
                     </li>
                 </Link>
-                <Link to='/profile/hana'>
+                <Link to={`/profile/${user?.username}`}>
                     <li className='flex items-center gap-2'>
                         <FaUser className='icon-sideBar' />
                         <span className='hidden md:flex text-secondary-900'>Profile</span>

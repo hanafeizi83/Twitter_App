@@ -1,11 +1,12 @@
 import React, { useRef, useState } from 'react'
 import { FaArrowLeft, FaLink } from "react-icons/fa";
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { MdEdit } from "react-icons/md";
 import { IoCalendarOutline } from "react-icons/io5";
 import Posts from './../feature/post/Posts'
 import Modal from '../ui/Modal';
 import ProfileUpdateForm from '../feature/profile/ProfileUpdateForm';
+import useUser from '../hook/useUser';
 function Profile() {
     const coverImgRef = useRef();
     const userImgRef = useRef();
@@ -20,7 +21,8 @@ function Profile() {
             if (state === 'userImg') setUserImg(URL.createObjectURL(e.target.files[0]))
         }
     }
-
+    const { username } = useParams();
+    const { authUser } = useUser();
     console.log(feedType);
 
 
@@ -125,7 +127,7 @@ function Profile() {
                     </div>
                 </div>
 
-                <Posts />
+                <Posts feedType={feedType} username={username} />
             </div>
             <Modal open={open} onClose={() => setOpen(false)} title='Update Profile'>
                 <ProfileUpdateForm />

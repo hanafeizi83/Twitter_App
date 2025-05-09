@@ -19,13 +19,13 @@ function CreatePost() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('hana');
-    
+
     createPost({ text, img: image }, {
-      // onSuccess: () => {
-      //   setImage('');
-      //   setText('');
-      //   imgRef.current.value = null;
-      // }
+      onSuccess: () => {
+        setImage('');
+        setText('');
+        imgRef.current.value = null;
+      }
     })
   }
   return (
