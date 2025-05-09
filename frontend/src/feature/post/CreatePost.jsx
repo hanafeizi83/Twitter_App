@@ -12,8 +12,18 @@ function CreatePost() {
   const { isLoading, authUser } = useUser();
   const { isCreating, createPost } = useCreatePost();
   const handelChangeImg = (e) => {
-    if (e.target.files) {
-      setImage(URL.createObjectURL(e.target.files[0]))
+    // if (e.target.files) {
+    //   setImage(URL.createObjectURL(e.target.files[0]))
+    // }
+
+    const file = e.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setImage(reader.result);
+      };
+      reader.readAsDataURL(file);
     }
   }
   const handleSubmit = (e) => {
@@ -39,7 +49,7 @@ function CreatePost() {
           className='bg-transparent outline-none w-full text-secondary-800 placeholder:text-secondary-500 border-b border-secondary-400 h-[4rem] resize-none'
           placeholder='What is happening?!'
         ></textarea>
-        {image && <div className='flex flex-col items-end w-[90%] md:w-[70%] lg:w-[60%] m-auto'>
+        {image && <div className='flex flex-col items-end w-[90%] md:w-[70%] lg:w-[60%]  m-auto'>
           <IoCloseSharp
             onClick={
               () => {

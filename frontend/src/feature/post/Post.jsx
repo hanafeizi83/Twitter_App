@@ -46,7 +46,7 @@ function Post({ post }) {
               <p className='text-secondary-800 text-center py-2'>{post.text} </p>
               {
                 post.img &&
-                <img src={post.img} alt="" className='w-full border border-secondary-400 rounded' />
+                <img src={post.img} alt="" className='w-full border border-secondary-400 h-96 rounded' />
               }
             </div>
             {/* Post Footer */}
