@@ -1,6 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
+import useCreateComment from './useCreateComment';
 
-function Comments({ comments }) {
+function Comments({ comments, postId, onClose }) {
+    const { createComment, isCreating } = useCreateComment();
+    const [comment, setComment] = useState('');
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        createComment({ id: postId, data: { text: comment } }, {
+            onSuccess: () => {
+                setComment('')
+            }
+        })
+    }
     return (
         <div>
             <div className='space-y-4 border-b border-b-secondary-400 pb-4'>
@@ -16,12 +27,14 @@ function Comments({ comments }) {
                 })
                 }
             </div>
-            <form className='flex items-center justify-between mt-4'>
-                <textarea 
-                type="text" 
-                placeholder='Add a comment'
-                className='w-[83%] h-24 bg-secondary-100 border border-secondary-200 border-b-2 border-b-secondary-300 rounded-md p-1 resize-none placeholder:text-secondary-400 text-secondary-700 flex items-start' />
-                <button className='btn-primary w-[15%] py-1'>Post</button>
+            <form onSubmit={handleSubmit} className='flex items-center justify-between mt-4'>
+                <textarea
+                    type="text"
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                    placeholder='Add a comment'
+                    className='w-[83%] h-24 bg-secondary-100 border border-secondary-200 border-b-2 border-b-secondary-300 rounded-md p-1 resize-none placeholder:text-secondary-400 text-secondary-700 flex items-start' />
+                <button type='submit' className='btn-primary w-[15%] py-1'>Post</button>
             </form>
         </div>
     )

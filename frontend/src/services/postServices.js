@@ -15,3 +15,7 @@ export function deletePostApi(id) {
 export function likePostApi(id) {
     return http.post(`/posts/like/${id}`).then(({ data }) => data);
 }
+
+export function commentPostApi({ id, data }) {
+    return http.post(`/posts/comment/${id}`, data).then(({ data }) => data);
+}

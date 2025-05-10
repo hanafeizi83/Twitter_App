@@ -78,7 +78,7 @@ function Post({ post }) {
         </div>
       </div>
       <Modal open={open} onClose={() => setOpen(false)} title='COMMENTS'>
-        <Comments comments={post?.comments} />
+        <Comments comments={post?.comments} postId={post?._id} onClose={() => setOpen(false)}/>
       </Modal>
     </>
   )
