@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { FaArrowLeft, FaLink } from "react-icons/fa";
 import { Link, useParams } from 'react-router-dom'
 import { MdEdit } from "react-icons/md";
@@ -12,12 +12,19 @@ import { formatMemberSinceDate } from './../../utils/date/index'
 import usePosts from '../../feature/post/usePosts';
 
 function Profile() {
-    const coverImgRef = useRef();
-    const userImgRef = useRef();
     const [open, setOpen] = useState(false)
     const [coverImg, setCoverImg] = useState();
     const [userImg, setUserImg] = useState();
     const [feedType, setFeedType] = useState('posts');
+
+    const { username } = useParams();
+
+    const coverImgRef = useRef();
+    const userImgRef = useRef();
+
+    const { authUser } = useUser();
+    const { user, isLoading, refetch } = useUserProfile(username);
+    const { posts } = usePosts(feedType, username);
 
     const handelChange = (e, state) => {
         if (e.target.files) {
@@ -25,15 +32,17 @@ function Profile() {
             if (state === 'userImg') setUserImg(URL.createObjectURL(e.target.files[0]))
         }
     }
-    const { username } = useParams();
-    const { authUser } = useUser();
-    const { user, isLoading } = useUserProfile(username);
-    const { posts } = usePosts(feedType, username);
+
     const isMyProfile = authUser?._id === user?._id;
-    console.log(feedType);
+    const amIFollowing = authUser?.following.includes(user?._id);
+    const memberSinceDate = formatMemberSinceDate(user?.createdAt);
 
-    console.log(user, authUser);
+    // console.log(feedType);
+    // console.log(user, authUser);
 
+    useEffect(() => {
+        refetch();
+    }, [username, refetch])
     return (
         <>
             <div className='lg:w-[56%] w-full border-x border-secondary-300'>
@@ -88,8 +97,8 @@ function Profile() {
                                     </div>
                                 </>
                                 :
-                                <button className='absolute right-4 top-28 bg-secondary-900 rounded-full text-secondary-0 font-bold px-4 py-1'>
-                                    {authUser?.following.includes(user?._id) ? 'Unfollow' : 'Follow'}
+                                <button className='absolute right-4 top-28 bg-secondary-900 rounded-full text-secondary-0 font-bold px-3 py-1 transition-all duration-300 hover:bg-black hover:text-secondary-800'>
+                                    {amIFollowing ? 'Unfollow' : 'Follow'}
 
                                 </button>
                         }
@@ -109,15 +118,15 @@ function Profile() {
                             {user?.link}
                         </a>
                         <IoCalendarOutline className='w-4 h-4 text-secondary-400' />
-                        <span className='text-secondary-400 text-sm'>{formatMemberSinceDate(user?.createdAt)}</span>
+                        <span className='text-secondary-400 text-sm'>{memberSinceDate}</span>
                     </div>
                     <div className='flex items-center gap-2 mt-4'>
                         <div className='flex items-center gap-1'>
-                            <h2 className='font-sm font-bold text-secondary-800'>{user?.following.length}</h2>
+                            <h2 className='font-sm text-secondary-800'>{user?.following.length}</h2>
                             <span className='text-secondary-400'>Following</span>
                         </div>
                         <div className='flex items-center gap-1'>
-                            <h2 className='font-sm font-bold text-secondary-800'>{user?.followers.length}</h2>
+                            <h2 className='font-sm text-secondary-800'>{user?.followers.length}</h2>
                             <span className='text-secondary-400'>Followers</span>
                         </div>
 

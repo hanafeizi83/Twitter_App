@@ -11,14 +11,14 @@ function RightPanel() {
                 suggestedUsers && suggestedUsers.map(user => {
                     return <div key={user._id} className='grid grid-cols-[40px_1fr_65px] grid-rows-1 items-center mb-4'>
                         <Link to={`profile/${user.username}`}>
-                            <img src={user.profileImg || '/avatar-placeholder.png'} alt="" className='w-10 h-10 rounded-full' />
+                            <img src={user.profileImg || '/avatar-placeholder.png'} alt="" className='w-8 h-8 rounded-full' />
                         </Link>
 
                         <Link to={`profile/${user.username}`} className='text-center text-secondary-800'>
                             <h2 className='font-extrabold text-sm'>{user.fullName}</h2>
                             <p className='text-[12px] text-secondary-500'>@{user.username}</p>
                         </Link>
-                        <button className='bg-secondary-900 text-secondary-0 font-lg font-bold rounded-full p-1'>Follow</button>
+                        <button className='bg-secondary-900 text-secondary-0 font-bold  rounded-full py-1'>Follow</button>
                     </div>
                 })
             }
