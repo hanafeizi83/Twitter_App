@@ -11,3 +11,7 @@ export function userProfileApi(username) {
 export function editUserProfileApi(data) {
     return http.post('/users/update', data).then(({ data }) => data);
 }
+
+export function followUserApi(userId) {
+    return http.post(`/users/follow/${userId}`).then(({ data }) => data);
+}

@@ -12,6 +12,7 @@ import { formatMemberSinceDate } from './../../utils/date/index'
 import usePosts from '../../feature/post/usePosts';
 import useEditProfile from './useEditProfile';
 import Loading from './../../ui/Loading'
+import useFollow from '../../hook/useFollow';
 
 function Profile() {
     const [open, setOpen] = useState(false)
@@ -27,7 +28,8 @@ function Profile() {
     const { authUser } = useUser();
     const { user, isLoading, refetch } = useUserProfile(username);
     const { posts } = usePosts(feedType, username);
-    const { editProfile, isEditing } = useEditProfile()
+    const { editProfile, isEditing } = useEditProfile();
+    const { follow, isFollowing } = useFollow();
 
     const handelChange = (e, state) => {
         const file = e.target.files[0];
@@ -118,7 +120,9 @@ function Profile() {
                                     </div>
                                 </>
                                 :
-                                <button className='absolute right-4 top-28 bg-secondary-900 rounded-full text-secondary-0 font-bold px-3 py-1 transition-all duration-300 hover:bg-black hover:text-secondary-800'>
+                                <button
+                                    onClick={() => follow(user?._id)}
+                                    className='absolute right-4 top-28 bg-secondary-900 rounded-full text-secondary-0 font-bold px-3 py-1 transition-all duration-300 hover:bg-black hover:text-secondary-800'>
                                     {amIFollowing ? 'Unfollow' : 'Follow'}
 
                                 </button>

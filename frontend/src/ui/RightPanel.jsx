@@ -2,8 +2,10 @@ import React from 'react'
 import { USERS_FOR_RIGHT_PANEL } from './../utils/db/dummy'
 import { Link } from 'react-router-dom';
 import useSuggestedUsers from '../hook/useSuggestedUsers';
+import useFollow from '../hook/useFollow';
 function RightPanel() {
     const { suggestedUsers, isLoading } = useSuggestedUsers();
+    const { follow, isFollowing } = useFollow();
     return (
         <div className='bg-black w-[22%] rounded-md p-2 top-0 right-0 hidden lg:sticky self-start  lg:flex flex-col'>
             <h1 className='font-extrabold text-secondary-900 text-center mb-2'>Who to follow</h1>
@@ -18,7 +20,9 @@ function RightPanel() {
                             <h2 className='font-extrabold text-sm'>{user.fullName}</h2>
                             <p className='text-[12px] text-secondary-500'>@{user.username}</p>
                         </Link>
-                        <button className='bg-secondary-900 text-secondary-0 font-bold  rounded-full py-1'>Follow</button>
+                        <button
+                            onClick={() => follow(user?._id)}
+                            className='bg-secondary-900 text-secondary-0 font-bold  rounded-full py-1'>Follow</button>
                     </div>
                 })
             }
