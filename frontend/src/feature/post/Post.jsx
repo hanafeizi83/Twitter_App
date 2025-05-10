@@ -29,12 +29,12 @@ function Post({ post }) {
       <div className='border border-secondary-300'>
         {/* Post Header */}
         <div className='flex gap-2 px-4 py-2'>
-          <img src={post.user.profileImg || '/avatar-placeholder.png'} alt="" className='rounded-full w-8 h-8' />
+          <img src={post?.user?.profileImg || '/avatar-placeholder.png'} alt="" className='rounded-full w-8 h-8' />
           <div className='w-full '>
             <div className='flex items-center justify-between'>
               <div className='flex items-center gap-2'>
-                <h2 className='text-secondary-800 font-bold'>{post.user.fullName}</h2>
-                <p className='text-secondary-200 text-sm'> @{post.user.username} - {date}</p>
+                <h2 className='text-secondary-800 font-bold'>{post?.user?.fullName}</h2>
+                <p className='text-secondary-200 text-sm'> @{post?.user?.username} - {date}</p>
               </div>
               {
                 isMyPost &&
@@ -46,10 +46,10 @@ function Post({ post }) {
             </div>
             {/* Post Cotent */}
             <div>
-              <p className='text-secondary-800 text-center py-2'>{post.text} </p>
+              <p className='text-secondary-800 text-center py-2'>{post?.text} </p>
               {
                 post.img &&
-                <img src={post.img} alt="" className='w-full border border-secondary-400 h-96 rounded' />
+                <img src={post?.img} alt="" className='w-full border border-secondary-400 h-96 rounded' />
               }
             </div>
             {/* Post Footer */}

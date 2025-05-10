@@ -6,6 +6,8 @@ import useNotification from './useNotification';
 
 function Notification() {
     const { notifications, isLoading } = useNotification();
+    console.log(notifications);
+    
 
     return (
         <div className='border-x border-secondary-300 lg:w-[56%] h-screen w-full'>
@@ -26,11 +28,11 @@ function Notification() {
                             {item.type == 'follow' && <FaUser className='w-7 h-7 text-primary-800' />}
                             {item.type == 'like' && <FaHeart className='w-7 h-7 text-red-500' />}
                             <div className='flex flex-col items-center'>
-                                <Link to={`/profile/hana`}>
-                                    <img src="/avatars/boy2.png" alt="profileImg" className='w-8 h-8' />
+                                <Link to={`/profile/${item?.from?.username}`}>
+                                    <img src={item?.from?.profileImg} alt="profileImg" className='w-8 h-8' />
                                 </Link>
-                                <Link to={`/profile/hana`} className='flex text-secondary-700 gap-2'>
-                                    <h3 className='font-bold'>@hana</h3>
+                                <Link to={`/profile/${item?.from?.username}`} className='flex text-secondary-700 gap-2'>
+                                    <h3 className='font-bold'>@{item?.from?.username}</h3>
                                     {item.type == 'follow' && <p className='text-secondary-700'>followed you</p>}
                                     {item.type == 'like' && <p className='text-secondary-700'>liked your post</p>}
                                 </Link>
