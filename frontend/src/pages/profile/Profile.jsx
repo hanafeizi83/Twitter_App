@@ -134,7 +134,7 @@ function Profile() {
                     <div className='flex items-center gap-2 mt-4'>
                         <a
                             className='text-primary-800 flex items-center gap-1'
-                            href="https://github.com/hanafeizi83">
+                            href={user?.link}>
                             {user?.link && <FaLink className='w-3 h-3 text-secondary-400' />}
                             {user?.link}
                         </a>
@@ -171,7 +171,7 @@ function Profile() {
                 <Posts feedType={feedType} username={username} userId={user?._id} />
             </div>
             <Modal open={open} onClose={() => setOpen(false)} title='Update Profile'>
-                <ProfileUpdateForm />
+                <ProfileUpdateForm authUser={authUser} onClose={() => setOpen(false)} />
             </Modal>
 
         </>
