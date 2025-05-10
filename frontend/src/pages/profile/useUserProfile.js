@@ -3,7 +3,7 @@ import { userProfileApi } from "../../services/userServices";
 
 export default function useUserProfile(username) {
     const { data: user, isLoading, refetch } = useQuery({
-        queryKey: ['userProfilw'],
+        queryKey: ['userProfile'],
         queryFn: () => userProfileApi(username)
     })
 

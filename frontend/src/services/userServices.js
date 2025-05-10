@@ -7,3 +7,7 @@ export function suggestedUsersApi() {
 export function userProfileApi(username) {
     return http.get(`/users/profile/${username}`).then(({ data }) => data);
 }
+
+export function editUserProfileApi(data) {
+    return http.post('/users/update', data).then(({ data }) => data);
+}

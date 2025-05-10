@@ -10,6 +10,8 @@ import useUser from '../../hook/useUser';
 import useUserProfile from './useUserProfile';
 import { formatMemberSinceDate } from './../../utils/date/index'
 import usePosts from '../../feature/post/usePosts';
+import useEditProfile from './useEditProfile';
+import Loading from './../../ui/Loading'
 
 function Profile() {
     const [open, setOpen] = useState(false)
@@ -25,12 +27,23 @@ function Profile() {
     const { authUser } = useUser();
     const { user, isLoading, refetch } = useUserProfile(username);
     const { posts } = usePosts(feedType, username);
+    const { editProfile, isEditing } = useEditProfile()
 
     const handelChange = (e, state) => {
-        if (e.target.files) {
-            if (state === 'coverImg') setCoverImg(URL.createObjectURL(e.target.files[0]))
-            if (state === 'userImg') setUserImg(URL.createObjectURL(e.target.files[0]))
+        const file = e.target.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                if (state === 'coverImg') setCoverImg(reader.result);
+                if (state === 'userImg') setUserImg(reader.result);
+            };
+            reader.readAsDataURL(file);
         }
+        // if (e.target.files) {
+        //     if (state === 'coverImg') setCoverImg(URL.createObjectURL(e.target.files[0]))
+        //     if (state === 'userImg') setUserImg(URL.createObjectURL(e.target.files[0]))
+        // }
     }
 
     const isMyProfile = authUser?._id === user?._id;
@@ -93,7 +106,15 @@ function Profile() {
                                         <button
                                             onClick={() => setOpen(true)}
                                             className='text-secondary-800 border border-secondary-700 px-3 py-1 rounded-full '>Edit Profile</button>
-                                        {(userImg || coverImg) && <button className='bg-primary-900 text-secondary-800 px-3 py-1 rounded-full'>Update</button>}
+                                        {(userImg || coverImg) && <button
+                                            onClick={async () => {
+                                                await editProfile({ coverImg, profileImg: userImg });
+                                                // setCoverImg(null)
+                                                // setUserImg(null)
+                                            }}
+                                            className='bg-primary-900 text-secondary-800 px-3 py-1 rounded-full'>
+                                            {isEditing ? 'Updating...' : 'Update'}
+                                        </button>}
                                     </div>
                                 </>
                                 :
