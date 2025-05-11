@@ -14,7 +14,8 @@ function Posts({ feedType, username, userId }) {
     <>
       {
 
-        isLoading || isRefetching && <div> <PostSkeleton />
+        (isLoading || isRefetching) && <div>
+          <PostSkeleton />
           <PostSkeleton />
           <PostSkeleton />
         </div>

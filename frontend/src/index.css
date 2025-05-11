@@ -78,11 +78,12 @@ body {
     .icon-sideBar {
         @apply md:w-8 md:h-8 w-10 h-10 text-secondary-900
     }
-    .inputModal{
+
+    .inputModal {
         @apply bg-transparent w-full h-[2.6rem] placeholder:text-secondary-500 text-secondary-800 p-1 border border-secondary-400 rounded
     }
 }
 
 .postScrollBar::-webkit-scrollbar {
-     display: none;
+    display: none !important;
 }
