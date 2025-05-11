@@ -18,9 +18,9 @@ export default function usePosts(feedType, username, userId) {
     }
 
     const postEndPoint = getPostEndPoint();
-    const { data: posts, isLoading, refetch } = useQuery({
+    const { data: posts, isLoading, refetch, isRefetching } = useQuery({
         queryKey: ['posts'],
         queryFn: () => postsApi(postEndPoint)
     })
-    return { posts, isLoading, refetch }
+    return { posts, isLoading, refetch, isRefetching }
 }

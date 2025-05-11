@@ -1,6 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* @plugin "daisyui"; */
+
 
 body {
     background-color: rgb(var(--color-secondary-100));
@@ -81,6 +83,6 @@ body {
     }
 }
 
-.scrollBar::-webkit-scrollbar {
-    display: none;
+.postScrollBar::-webkit-scrollbar {
+     display: none;
 }

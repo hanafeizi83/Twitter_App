@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+import daisyui from "daisyui";
 
 function withOpacity(nameValue) {
   return ({ opacityValue }) => {
@@ -46,5 +47,5 @@ export default {
       }
     },
   },
-  plugins: [],
+  plugins: [daisyui],
 }
