@@ -10,6 +10,7 @@ import useUser from '../../hook/useUser';
 import useDeletePost from './useDeletePost';
 import useLikePost from './useLikePost';
 import { formatPostDate } from './../../utils/date/index';
+import Loading from '../../ui/Loading';
 
 function Post({ post }) {
   const [open, setOpen] = useState(false);
@@ -38,10 +39,15 @@ function Post({ post }) {
               </div>
               {
                 isMyPost &&
-                <BsFillTrashFill
-                  className='text-secondary-800 cursor-pointer transition-all duration-300 hover:text-red-600'
-                  onClick={() => deletePost(post?._id)}
-                />
+                <button>
+                  {isDeleting ? <Loading size='sm' /> :
+                    <BsFillTrashFill
+                      className='text-secondary-800 cursor-pointer transition-all duration-300 hover:text-red-600'
+                      onClick={() => deletePost(post?._id)}
+                    />
+                  }
+
+                </button>
               }
             </div>
             {/* Post Cotent */}
@@ -78,7 +84,7 @@ function Post({ post }) {
         </div>
       </div>
       <Modal open={open} onClose={() => setOpen(false)} title='COMMENTS'>
-        <Comments comments={post?.comments} postId={post?._id} onClose={() => setOpen(false)}/>
+        <Comments comments={post?.comments} postId={post?._id} onClose={() => setOpen(false)} />
       </Modal>
     </>
   )

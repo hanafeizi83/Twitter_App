@@ -54,10 +54,7 @@ function LoginPage() {
           <button type='submit' className='btn-primary flex items-center justify-center'>
             {isLoading ?
               <Loading
-                color='white'
-                width='30'
-                height='30'
-                strok='3'
+                size='sm'
               /> :
               'Login'}
           </button>

@@ -64,10 +64,7 @@ function SignupPage() {
                         {
                             isLoading ?
                                 <Loading
-                                    color='white'
-                                    width='30'
-                                    height='30'
-                                    strok='3'
+                                    size='sm'
                                 /> :
                                 'Sign up'
                         }

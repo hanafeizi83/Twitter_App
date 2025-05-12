@@ -4,6 +4,7 @@ import { BsEmojiSmileFill } from "react-icons/bs";
 import { IoCloseSharp } from 'react-icons/io5';
 import useUser from './../../hook/useUser'
 import useCreatePost from './useCreatePost';
+import Loading from './../../ui/Loading'
 
 function CreatePost() {
   const imgRef = useRef();
@@ -12,10 +13,6 @@ function CreatePost() {
   const { isLoading, authUser } = useUser();
   const { isCreating, createPost } = useCreatePost();
   const handelChangeImg = (e) => {
-    // if (e.target.files) {
-    //   setImage(URL.createObjectURL(e.target.files[0]))
-    // }
-
     const file = e.target.files[0];
 
     if (file) {
@@ -67,7 +64,9 @@ function CreatePost() {
             <input type="file" ref={imgRef} className='hidden' accept="image/*" onChange={handelChangeImg} />
             <BsEmojiSmileFill className='text-primary-800 w-6 h-6 cursor-pointer' />
           </div>
-          <button className='bg-primary-900 text-secondary-800 rounded-full px-4 py-1'>Post</button>
+          <button className='bg-primary-900 text-secondary-800 rounded-full px-4 py-1'>
+            {isCreating ? <Loading size='sm' /> : "Post"}
+          </button>
         </div>
       </form>
 

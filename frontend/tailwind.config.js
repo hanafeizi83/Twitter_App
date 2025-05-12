@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 import daisyui from "daisyui";
-
+import plugin from "tailwindcss/plugin"
 function withOpacity(nameValue) {
   return ({ opacityValue }) => {
     if (opacityValue !== undefined) {
@@ -47,5 +47,22 @@ export default {
       }
     },
   },
-  plugins: [daisyui],
+  plugins: [
+    daisyui,
+    plugin(({ addBase, theme }) => {
+      addBase({
+        '.scrollbar': {
+          scrollbarWidth: 'none',
+        },
+      });
+    }),
+
+  ],
+  daisyui: {
+    styled: true,
+    themes: true,
+    base: true,
+    utils: true,
+    logs: true
+  }
 }

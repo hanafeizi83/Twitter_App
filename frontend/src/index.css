@@ -8,6 +8,10 @@ body {
     background-color: rgb(var(--color-secondary-100));
 }
 
+/* .postScrollBar::-webkit-scrollbar {
+    display: none;
+} */
+
 @layer base {
     :root {
 
@@ -84,6 +88,8 @@ body {
     }
 }
 
-.postScrollBar::-webkit-scrollbar {
-    display: none !important;
+@layer utilities {
+    /* .scrollbar::-webkit-scrollbar {
+        display: none;
+    } */
 }

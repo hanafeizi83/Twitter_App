@@ -44,10 +44,6 @@ function Profile() {
             };
             reader.readAsDataURL(file);
         }
-        // if (e.target.files) {
-        //     if (state === 'coverImg') setCoverImg(URL.createObjectURL(e.target.files[0]))
-        //     if (state === 'userImg') setUserImg(URL.createObjectURL(e.target.files[0]))
-        // }
     }
 
     const isMyProfile = authUser?._id === user?._id;
@@ -135,7 +131,8 @@ function Profile() {
                                         <button
                                             onClick={() => follow(user?._id)}
                                             className='absolute right-4 top-28 bg-secondary-900 rounded-full text-secondary-0 font-bold px-3 py-1 transition-all duration-300 hover:bg-black hover:text-secondary-800'>
-                                            {amIFollowing ? 'Unfollow' : 'Follow'}
+                                            { }
+                                            {isFollowing ? <Loading /> : (amIFollowing ? 'Unfollow' : 'Follow')}
 
                                         </button>
                                 }

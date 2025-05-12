@@ -3,12 +3,11 @@ import { FaHeart, FaUser } from 'react-icons/fa';
 import { Link } from 'react-router-dom'
 import NotificationSetting from '../../ui/NotificationSetting';
 import useNotification from './useNotification';
+import Loading from './../../ui/Loading'
 
 function Notification() {
     const { notifications, isLoading } = useNotification();
-    console.log(notifications);
     
-
     return (
         <div className='border-x border-secondary-300 lg:w-[56%] h-screen w-full'>
             {/* Notification Header */}
@@ -20,10 +19,13 @@ function Notification() {
 
             <div>
                 {
-                    notifications && !notifications.length && <h2 className='font-bold text-secondary-800 text-center py-4'>No Notification 🤔</h2>
+                    isLoading && <div className='w-full h-screen flex items-center justify-center'>  <Loading size='xl' /> </div>
                 }
                 {
-                    notifications && notifications.map((item) => {
+                    !isLoading && notifications && !notifications.length && <h2 className='font-bold text-secondary-800 text-center py-4'>No Notification 🤔</h2>
+                }
+                {
+                    !isLoading && notifications && notifications.map((item) => {
                         return <div className='flex p-4 gap-2 border-y border-y-secondary-300'>
                             {item.type == 'follow' && <FaUser className='w-7 h-7 text-primary-800' />}
                             {item.type == 'like' && <FaHeart className='w-7 h-7 text-red-500' />}
