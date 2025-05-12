@@ -15,9 +15,10 @@ import Loading from '../../ui/Loading';
 function Post({ post }) {
   const [open, setOpen] = useState(false);
 
+
   const { authUser } = useUser();
   const { isDeleting, deletePost } = useDeletePost();
-  const { isLiking, likePost } = useLikePost();
+  const { isLiking, likePost } = useLikePost(post?._id);
 
   // console.log(authUser);
   // console.log(post);
@@ -70,12 +71,15 @@ function Post({ post }) {
                 <RiShareForward2Fill />
                 <span >{post?.share?.length || 0}</span>
               </div>
-              <div
-                onClick={() => likePost(post?._id)}
-                className={`group flex items-center hover:text-pink-500 gap-1 transition-all duration-300 cursor-pointer  ${isLiked ? 'text-pink-500' : 'text-secondary-400'}`}>
-                <FaRegHeart />
-                <span className={`group-hover:text-pink-500 ${isLiked ? 'text-pink-500' : 'text-secondary-400'} `}>{post?.likes?.length}</span>
-              </div>
+              {
+                isLiking ? <Loading size='sm' /> : <div
+                  onClick={() => likePost(post?._id)}
+                  className={`group flex items-center hover:text-pink-500 gap-1 transition-all duration-300 cursor-pointer  ${isLiked ? 'text-pink-500' : 'text-secondary-400'}`}>
+                  <FaRegHeart />
+                  <span className={`group-hover:text-pink-500 ${isLiked ? 'text-pink-500' : 'text-secondary-400'} `}>{post?.likes?.length}</span>
+                </div>
+              }
+
               <div className='flex items-center text-secondary-400 gap-1 transition-all duration-300 cursor-pointer'>
                 <FaRegBookmark />
               </div>

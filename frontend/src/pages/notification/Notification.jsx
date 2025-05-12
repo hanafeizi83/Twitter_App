@@ -4,10 +4,12 @@ import { Link } from 'react-router-dom'
 import NotificationSetting from '../../ui/NotificationSetting';
 import useNotification from './useNotification';
 import Loading from './../../ui/Loading'
+import useDeleteNotifications from './useDeleteNotifications';
 
 function Notification() {
     const { notifications, isLoading } = useNotification();
-    
+    const { isDeleting } = useDeleteNotifications();
+
     return (
         <div className='border-x border-secondary-300 lg:w-[56%] h-screen w-full'>
             {/* Notification Header */}
@@ -19,14 +21,14 @@ function Notification() {
 
             <div>
                 {
-                    isLoading && <div className='w-full h-screen flex items-center justify-center'>  <Loading size='xl' /> </div>
+                    (isLoading || isDeleting) && <div className='w-full h-screen flex items-center justify-center'>  <Loading size='xl' /> </div>
                 }
                 {
                     !isLoading && notifications && !notifications.length && <h2 className='font-bold text-secondary-800 text-center py-4'>No Notification 🤔</h2>
                 }
                 {
                     !isLoading && notifications && notifications.map((item) => {
-                        return <div className='flex p-4 gap-2 border-y border-y-secondary-300'>
+                        return <div className='flex p-4 gap-2 border border-secondary-300'>
                             {item.type == 'follow' && <FaUser className='w-7 h-7 text-primary-800' />}
                             {item.type == 'like' && <FaHeart className='w-7 h-7 text-red-500' />}
                             <div className='flex flex-col items-center'>

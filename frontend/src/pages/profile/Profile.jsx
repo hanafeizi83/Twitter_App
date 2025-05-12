@@ -132,7 +132,7 @@ function Profile() {
                                             onClick={() => follow(user?._id)}
                                             className='absolute right-4 top-28 bg-secondary-900 rounded-full text-secondary-0 font-bold px-3 py-1 transition-all duration-300 hover:bg-black hover:text-secondary-800'>
                                             { }
-                                            {isFollowing ? <Loading /> : (amIFollowing ? 'Unfollow' : 'Follow')}
+                                            {isFollowing ? <Loading size='md'/> : (amIFollowing ? 'Unfollow' : 'Follow')}
 
                                         </button>
                                 }
