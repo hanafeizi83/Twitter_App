@@ -11,6 +11,7 @@ import useDeletePost from './useDeletePost';
 import useLikePost from './useLikePost';
 import { formatPostDate } from './../../utils/date/index';
 import Loading from '../../ui/Loading';
+import { Link } from 'react-router-dom';
 
 function Post({ post }) {
   const [open, setOpen] = useState(false);
@@ -28,16 +29,23 @@ function Post({ post }) {
   const date = formatPostDate(post?.createdAt);
   return (
     <>
-      <div className='border border-secondary-300'>
+      <div className='border-b border-b-secondary-300'>
         {/* Post Header */}
+
         <div className='flex gap-2 px-4 py-2'>
-          <img src={post?.user?.profileImg || '/avatar-placeholder.png'} alt="" className='rounded-full w-8 h-8' />
+          <Link to={`/profile/${post?.user?.username}`}>
+            <img src={post?.user?.profileImg || '/avatar-placeholder.png'} alt="" className='rounded-full w-8 h-8' />
+          </Link>
+
           <div className='w-full '>
             <div className='flex items-center justify-between'>
-              <div className='flex items-center gap-2'>
-                <h2 className='text-secondary-800 font-bold'>{post?.user?.fullName}</h2>
-                <p className='text-secondary-200 text-sm'> @{post?.user?.username} - {date}</p>
-              </div>
+              <Link to={`/profile/${post?.user?.username}`}>
+                <div className='flex items-center gap-2'>
+                  <h2 className='text-secondary-800 font-bold'>{post?.user?.fullName}</h2>
+                  <p className='text-secondary-200 text-sm'> @{post?.user?.username} - {date}</p>
+                </div>
+              </Link>
+
               {
                 isMyPost &&
                 <button>

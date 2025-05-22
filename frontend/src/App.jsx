@@ -8,19 +8,22 @@ import Notification from './pages/notification/Notification'
 import Profile from './pages/profile/Profile'
 import { Toaster } from 'react-hot-toast'
 import useUser from './hook/useUser'
+import ProtecteRoute from './ui/ProtecteRoute'
 function App() {
   const { authUser } = useUser();
   return (
     <>
       <Toaster />
       <Routes>
-        <Route path='/' element={<AppLayout />}>
-          <Route path='/' element={authUser ? <Home /> : <Navigate to='/login' />} />
-          <Route path='/notification' element={authUser ? <Notification /> : <Navigate to='/login' />} />
-          <Route path='/profile/:username' element={authUser ? <Profile /> : <Navigate to='/login' />} />
+        <Route path='/' element={<ProtecteRoute>
+          <AppLayout />
+        </ProtecteRoute>}>
+          <Route path='/' element={<Home />} />
+          <Route path='/notification' element={<Notification />} />
+          <Route path='/profile/:username' element={<Profile />} />
         </Route>
-        <Route path='/login' element={!authUser ? <LoginPage /> : <Navigate to='/' />} />
-        <Route path='/singup' element={!authUser ? <SignupPage /> : <Navigate to='/' />} />
+        <Route path='/login' element={<LoginPage />} />
+        <Route path='/singup' element={<SignupPage />} />
       </Routes>
     </>
   )

@@ -36,7 +36,7 @@ function CreatePost() {
     })
   }
   return (
-    <div className='w-full p-4 flex gap-4 border-x border-secondary-300'>
+    <div className='w-full p-4 flex gap-4 border-b border-b-secondary-300'>
       <img src={`${authUser.profileImg || '/avatar-placeholder.png'} `} alt="profile" className='w-8 h-8 rounded-full' />
       <form className='w-full space-y-1' onSubmit={handleSubmit}>
         <textarea

@@ -5,7 +5,7 @@ export default function useUser() {
     const { data: authUser, isLoading } = useQuery({
         queryKey: ['authUser'],
         queryFn: UserApi,
-        retry: false
+        // retry: false
     })
 
     return { authUser, isLoading }

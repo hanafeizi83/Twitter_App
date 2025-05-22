@@ -59,7 +59,7 @@ function Profile() {
     return (
         <>
             {
-                (isLoading || isRefetching) && <div className='lg:w-[56%] flex flex-col w-full'>
+                (isLoading || isRefetching) && <div className='flex flex-col w-full'>
                     <ProfileSkeleton />
                     <PostSkeleton />
                     <PostSkeleton />
@@ -68,7 +68,7 @@ function Profile() {
             }
             {
                 !isLoading && !isRefetching && <>
-                    <div className=' lg:w-[56%] w-full border-x border-secondary-300'>
+                    <div className='w-full border-x border-secondary-300'>
                         {/* Profile Header */}
                         <div className='flex items-center text-secondary-800 p-4 gap-8'>
                             <Link to={'/'}>
@@ -118,9 +118,13 @@ function Profile() {
                                                     className='text-secondary-800 border border-secondary-700 px-3 py-1 rounded-full '>Edit Profile</button>
                                                 {(userImg || coverImg) && <button
                                                     onClick={async () => {
-                                                        await editProfile({ coverImg, profileImg: userImg });
-                                                        // setCoverImg(null)
-                                                        // setUserImg(null)
+                                                        await editProfile({ coverImg, profileImg: userImg }, {
+                                                            onSuccess: () => {
+                                                                setCoverImg(null)
+                                                                setUserImg(null)
+                                                            }
+                                                        });
+
                                                     }}
                                                     className='bg-primary-900 text-secondary-800 px-3 py-1 rounded-full'>
                                                     {isEditing ? 'Updating...' : 'Update'}
@@ -132,7 +136,7 @@ function Profile() {
                                             onClick={() => follow(user?._id)}
                                             className='absolute right-4 top-28 bg-secondary-900 rounded-full text-secondary-0 font-bold px-3 py-1 transition-all duration-300 hover:bg-black hover:text-secondary-800'>
                                             { }
-                                            {isFollowing ? <Loading size='md'/> : (amIFollowing ? 'Unfollow' : 'Follow')}
+                                            {isFollowing ? <Loading size='md' /> : (amIFollowing ? 'Unfollow' : 'Follow')}
 
                                         </button>
                                 }
@@ -166,7 +170,7 @@ function Profile() {
 
                             </div>
                         </div>
-                        <div className='w-full border-x flex items-center justify-between border-b border-secondary-300'>
+                        <div className='w-full flex items-center justify-between border-b border-b-secondary-300'>
                             <div
                                 onClick={() => setFeedType('posts')}
                                 className='flex-1 flex  justify-center relative text-center text-secondary-700 cursor-pointer p-2 hover:bg-secondary-200 transition-all duration-300'>

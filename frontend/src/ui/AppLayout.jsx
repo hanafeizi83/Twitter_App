@@ -4,7 +4,7 @@ import RightPanel from './RightPanel'
 import { Outlet } from 'react-router-dom'
 function AppLayout() {
   return (
-    <div className='container scrollbar lg:max-w-screen-lg sm:px-10 lg:px-0  pt-8 pb-0 w-full flex justify-between overflow-auto h-[97vh] overscroll-none '>
+    <div className='lg:max-w-screen-lg grid pt-5 !w-full grid-cols-[5rem_1fr] sm:grid-cols-[8rem_1fr] md:grid-cols-[13rem_1fr] lg:grid-cols-[13rem_1fr_16rem] container'>
       <Sidebar />
       <Outlet />
       <RightPanel />

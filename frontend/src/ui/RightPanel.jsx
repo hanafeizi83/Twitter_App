@@ -12,7 +12,7 @@ function RightPanel() {
 
     return (
         <>
-            <div className='bg-black w-[22%] rounded-md p-2 top-0 right-0 hidden lg:sticky self-start  lg:flex flex-col'>
+            <div className='bg-black w-[16rem] ml-4 rounded-md p-2 top-0 right-0 hidden sticky self-start lg:flex flex-col'>
                 <h1 className='font-extrabold text-secondary-900 text-center mb-2'>Who to follow</h1>
                 {
                     isLoading && <div className='bg-black w-[22%] rounded-md p-2 top-0 right-0 hidden lg:sticky self-start  lg:flex flex-col'>
