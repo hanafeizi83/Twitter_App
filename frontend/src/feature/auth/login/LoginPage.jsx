@@ -44,7 +44,7 @@ function LoginPage() {
           onSubmit={formik.handleSubmit}
           className='flex gap-1 flex-col'>
           <XSvg className='w-24 lg:hidden fill-white' />
-          <h1 className='text-secondary-900 text-center font-extrabold text-4xl mb-6'>Let's go.</h1>
+          <h1 className='text-secondary-900 text-left font-extrabold text-4xl mb-6'>Let's go.</h1>
           <InputForm name='username' placeholder='Username' formik={formik}>
             <LuUser className='text-secondary-700 absolute pl-1 text-xl' />
           </InputForm>

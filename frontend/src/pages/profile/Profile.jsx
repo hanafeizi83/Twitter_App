@@ -148,15 +148,18 @@ function Profile() {
                             <h2 className='font-bold '>{user?.fullName}</h2>
                             <p className='text-secondary-400'>@{user?.username}</p>
                             <p>{user?.bio}</p>
-                            <div className='flex items-center gap-2 mt-4'>
+                            <div className='md:flex items-center gap-y-4 md:gap-2 mt-4'>
                                 <a
                                     className='text-primary-800 flex items-center gap-1'
                                     href={user?.link}>
                                     {user?.link && <FaLink className='w-3 h-3 text-secondary-400' />}
                                     {user?.link}
                                 </a>
-                                <IoCalendarOutline className='w-4 h-4 text-secondary-400' />
-                                <span className='text-secondary-400 text-sm'>{memberSinceDate}</span>
+                                <div className='flex items-start gap-2 '>
+                                    <IoCalendarOutline className='w-4 h-4 text-secondary-400' />
+                                    <span className='text-secondary-400 text-sm'>{memberSinceDate}</span>
+                                </div>
+
                             </div>
                             <div className='flex items-center gap-2 mt-4'>
                                 <div className='flex items-center gap-1'>

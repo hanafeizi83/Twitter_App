@@ -45,9 +45,9 @@ function SignupPage() {
             <div className='flex-1 flex flex-col justify-center items-center'>
                 <form
                     onSubmit={formik.handleSubmit}
-                    className='flex gap-1 flex-col w-[65%] md:w-[40%] lg:w-[65%]'>
+                    className='flex gap-1 flex-col w-[50%] md:w-[40%] lg:w-[65%]'>
                     <XSvg className='w-24 lg:hidden fill-white' />
-                    <h1 className='text-secondary-900 text-center font-extrabold text-4xl mb-2'>Join today.</h1>
+                    <h1 className='text-secondary-900 text-left font-extrabold text-4xl mb-2'>Join today.</h1>
                     <InputForm name='email' placeholder='Email' type='email' formik={formik}>
                         <MdOutlineMail className='text-secondary-700 absolute pl-1 text-xl' />
                     </InputForm>
@@ -71,7 +71,7 @@ function SignupPage() {
 
                     </button>
                 </form>
-                <div className='flex flex-col w-[60%] md:w-[40%] lg:w-[60%] gap-2 mt-4'>
+                <div className='flex flex-col w-[45%] md:w-[40%] lg:w-[60%] gap-2 mt-4'>
                     <p className='text-white text-lg text-center'>Already have an account?</p>
                     <Link to='/login'>
                         <button className='btn-primary bg-transparent border border-primary-800 text-white w-full'>Sign in</button>
