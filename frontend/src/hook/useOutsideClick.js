@@ -9,11 +9,11 @@ export default function useOutsideClick(cb) {
                 cb();
             }
         };
-        document.addEventListener('click', outSideClick, true);
+        document.addEventListener('mousedown', outSideClick, true);
 
 
         return () => {
-            document.removeEventListener('click', outSideClick, true);
+            document.removeEventListener('mousedown', outSideClick, true);
         }
     }, [ref]);
     return { ref };
