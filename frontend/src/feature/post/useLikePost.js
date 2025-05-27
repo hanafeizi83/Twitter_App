@@ -8,7 +8,7 @@ export default function useLikePost(postId) {
         mutationFn: likePostApi,
         onSuccess: (updatedLikes) => {
             queryClient.setQueryData(['posts'], (oldData) => {
-                return oldData.map(p => {
+                return oldData?.map(p => {
                     if (p._id === postId) {
                         return { ...p, likes: updatedLikes }
                     }
