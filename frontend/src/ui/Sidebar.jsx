@@ -13,7 +13,7 @@ function Sidebar() {
     const { authUser: user } = useUser()
 
     return (
-        <div className='sticky top-0 w-full flex flex-col h-[95vh] justify-between md:items-start '>
+        <div className='sticky top-0 w-full flex flex-col h-[90vh] justify-between md:items-start '>
             <ul className='flex flex-col gap-y-6 items-center sm:items-start sm:gap-5'>
                 <Link to='/'>
                     <XSvg className='lg:w-[20%] md:w-[30%] w-full fill-white mb-6' />
