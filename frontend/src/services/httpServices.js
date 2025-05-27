@@ -1,5 +1,5 @@
 import axios from 'axios'
-const BASE_URL = 'https://twitter-app-8nzt.onrender.com';
+const BASE_URL = 'https://twitter-app-8nzt.onrender.com/api';
 
 const app = axios.create({
     baseURL: BASE_URL,

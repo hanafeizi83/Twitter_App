@@ -7,8 +7,8 @@ export default function useLikePost(postId) {
     const { mutate: likePost, isPending: isLiking } = useMutation({
         mutationFn: likePostApi,
         onSuccess: (updatedLikes) => {
-            queryClient.setQueryData(['posts'], async (oldData) => {
-                return oldData && await oldData?.map(p => {
+            queryClient.setQueryData(['posts'], (oldData) => {
+                return  oldData.map(p => {
                     if (p._id === postId) {
                         return { ...p, likes: updatedLikes }
                     }
