@@ -16,7 +16,7 @@ function Comments({ comments, postId, onClose }) {
     return (
         <div>
             <div className='space-y-4 border-b border-b-secondary-400 pb-4'>
-                {!comments.length && <p className='text-secondary-400 text-center py-4'>No comments yet 😕 Be the first one 😉</p>}
+                {!comments.length && <p className='text-secondary-400 text-sm text-center py-4'>No comments yet 😕 Be the first one 😉</p>}
                 {comments && comments.map(comment => {
                     return <div className='flex items-start gap-2'>
                         <img src={comment.user.profileImg} alt="profileImg" className='w-10 h-10 rounded-full ' />
@@ -28,14 +28,14 @@ function Comments({ comments, postId, onClose }) {
                 })
                 }
             </div>
-            <form onSubmit={handleSubmit} className='flex items-center justify-between mt-4'>
+            <form onSubmit={handleSubmit} className='flex items-center gap-y-4 flex-col justify-between mt-4 md:flex-row'>
                 <textarea
                     type="text"
                     value={comment}
                     onChange={(e) => setComment(e.target.value)}
                     placeholder='Add a comment'
-                    className='w-[83%] h-24 bg-secondary-100 border border-secondary-200 border-b-2 border-b-secondary-300 rounded-md p-1 resize-none placeholder:text-secondary-400 text-secondary-700 flex items-start' />
-                <button type='submit' className='btn-primary w-[15%] py-1'>
+                    className='w-[100%] md:w-[83%] h-24 bg-secondary-100 border border-secondary-200 border-b-2 border-b-secondary-300 rounded-md p-1 resize-none placeholder:text-secondary-400 text-secondary-700 flex items-start' />
+                <button type='submit' className='btn-primary w-[100%] md:w-[15%] py-1'>
                     {isCreating ? <Loading size='sm' /> : 'Post'}
                 </button>
             </form>
