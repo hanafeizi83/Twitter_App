@@ -22,7 +22,7 @@ function RightPanel() {
                     </div>
                 }
                 {
-                    !isLoading && suggestedUsers && suggestedUsers.map(user => {
+                    !isLoading && suggestedUsers && suggestedUsers?.map(user => {
                         return <div key={user._id} className='grid grid-cols-[40px_1fr_65px] grid-rows-1 items-center mb-4'>
                             <Link to={`profile/${user.username}`}>
                                 <img src={user.profileImg || '/avatar-placeholder.png'} alt="" className='w-8 h-8 rounded-full' />
